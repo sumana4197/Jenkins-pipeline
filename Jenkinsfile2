@@ -1,0 +1,32 @@
+pipeline {
+    agent none 
+        stages {
+            stage ('Cloning a repository') {
+            agent {label 'slave01'}
+                steps {
+                    git 'https://github.com/sumana4197/jenkins-pipeline.git'
+                    echo "cloning is successful"
+                    }
+                  }
+             stage ('build') {
+             agent {label 'slave01'}
+                steps {
+                    sh 'mvn clean install'
+                    echo "building is successful"
+                    }
+                  }
+              stage ('deploy') {
+              agent {label 'slave02'}
+                steps {
+                    sh 'scp /home/ubuntu/.m2/repository/com/datica/java-war-deploy-example/0.1-SNAPSHOT/java-war-deploy-example-0.1-SNAPSHOT.jar ubuntu@172.31.19.226:/home/ubuntu'
+                    echo "deploy is successful"
+                    }
+                  }
+               stage ('test') {
+               agent {label 'slave02'}
+                steps {
+                    echo "testing is successful"
+                   }
+                 }
+                }
+              }
