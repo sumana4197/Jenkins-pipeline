@@ -15,5 +15,18 @@ pipeline {
                     echo "building is successful"
                     }
                   }
+              stage ('deploy') {
+              agent {label 'slave01'}
+                steps {
+                    sh '/home/ubuntu/.m2/repository/com/datica/java-war-deploy-example/0.1-SNAPSHOT/java-war-deploy-example-0.1-SNAPSHOT.jar /home/ubuntu'
+                    echo "deploy is successful"
+                    }
+                  }
+               stage ('test') {
+               agent {label 'slave01'}
+                steps {
+                    echo "testing is successful"
+                   }
+                 }
                 }
               }
