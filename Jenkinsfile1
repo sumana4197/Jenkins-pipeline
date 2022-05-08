@@ -8,5 +8,12 @@ pipeline {
                     echo "cloning is successful"
                     }
                   }
+             stage ('build') {
+             agent {label 'slave01'}
+                steps {
+                    sh 'mvn clean install'
+                    echo "building is successful"
+                    }
+                  }
                 }
               }
