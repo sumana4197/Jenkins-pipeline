@@ -8,9 +8,10 @@ pipeline {
                     echo "cloning is successful"
                     }
                   }
-            parallel {
-             stage ('build') {
-             agent {label 'slave01'}
+           stage ('build and deploy') {
+             parallel {
+               stage ('build') {
+               agent {label 'slave01'}
                 steps {
                     sh 'mvn clean install'
                     echo "building is successful"
@@ -24,6 +25,7 @@ pipeline {
                     }
                   }
                 }
+             }
                stage ('test') {
                agent {label 'slave01'}
                 steps {
