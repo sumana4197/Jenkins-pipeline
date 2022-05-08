@@ -18,7 +18,7 @@ pipeline {
               stage ('deploy') {
               agent {label 'slave01'}
                 steps {
-                    sh '/home/ubuntu/.m2/repository/com/datica/java-war-deploy-example/0.1-SNAPSHOT/java-war-deploy-example-0.1-SNAPSHOT.jar /home/ubuntu'
+                    sh 'cp /home/ubuntu/.m2/repository/com/datica/java-war-deploy-example/0.1-SNAPSHOT/java-war-deploy-example-0.1-SNAPSHOT.jar /home/ubuntu'
                     echo "deploy is successful"
                     }
                   }
