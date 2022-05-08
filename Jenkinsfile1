@@ -1,0 +1,12 @@
+pipeline {
+    agent none 
+        stages {
+            stage ('Cloning a repository') {
+            agent {label 'slave01'}
+                steps {
+                    git 'https://github.com/sumana4197/jenkins-pipeline.git'
+                    echo "cloning is successful"
+                    }
+                  }
+                }
+              }
